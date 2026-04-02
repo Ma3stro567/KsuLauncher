@@ -1,0 +1,7 @@
+eel
+minecraft-launcher-lib
+gdown
+pandas
+requests
+setuptools<70.0.0
+pyinstaller
