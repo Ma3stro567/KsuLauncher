@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KsuLauncher</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <script type="text/javascript" src="/eel.js"></script>
+</head>
+<body>
+    <div class="background-overlay"></div>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <nav class="sidebar">
+            <div class="logo">
+                <span class="logo-text">KSU</span>
+            </div>
+            <div class="nav-links">
+                <button class="nav-btn active" data-target="home-screen" title="Главная">
+                    <svg viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M10,20V14H14V20H19V12H22L12,3L2,12H5V20H10Z"/></svg>
+                </button>
+                <button class="nav-btn" data-target="rp-screen" title="Ресурспаки">
+                    <svg viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M12,2L4.5,20.29L5.21,21L12,18L18.79,21L19.5,20.29L12,2Z"/></svg>
+                </button>
+                <button class="nav-btn" data-target="settings-screen" title="Настройки">
+                    <svg viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M12,15.5A3.5,3.5 0 0,1 8.5,12A3.5,3.5 0 0,1 12,8.5A3.5,3.5 0 0,1 15.5,12A3.5,3.5 0 0,1 12,15.5M19.43,12.97C19.47,12.65 19.5,12.33 19.5,12C19.5,11.67 19.47,11.35 19.43,11.03L21.54,9.37C21.73,9.22 21.78,8.96 21.66,8.75L19.66,5.29C19.54,5.08 19.28,5 19.06,5.09L16.56,6.1C16.04,5.7 15.47,5.38 14.86,5.12L14.47,2.45C14.43,2.22 14.24,2.05 14,2.05H10C9.76,2.05 9.57,2.22 9.53,2.45L9.14,5.12C8.53,5.38 7.96,5.7 7.44,6.1L4.94,5.09C4.72,5 4.46,5.08 4.34,5.29L2.34,8.75C2.22,8.96 2.27,9.22 2.46,9.37L4.57,11.03C4.53,12.65 4.5,12.33 4.5,12C4.5,11.67 4.53,11.35 4.57,12.97L2.46,14.63C2.27,14.78 2.22,15.04 2.34,15.25L4.34,18.71C4.46,18.92 4.72,19 4.94,18.91L7.44,17.9C7.96,18.3 8.53,18.62 9.14,18.88L9.53,21.55C9.57,21.78 9.76,21.95 10,21.95H14C14.24,21.95 14.43,21.78 14.47,21.55L14.86,18.88C15.47,18.62 16.04,18.3 16.56,17.9L19.06,18.91C19.28,19 19.54,18.92 19.66,18.71L21.66,15.25C21.78,15.04 21.73,14.78 21.54,14.63L19.43,12.97Z"/></svg>
+                </button>
+            </div>
+            <div class="window-controls">
+                <button id="minimize-btn" title="Свернуть">—</button>
+                <button id="close-btn" title="Закрыть">×</button>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="content">
+            <!-- Home Screen -->
+            <section id="home-screen" class="screen active">
+                <div class="version-info">
+                    <h1>KsuLauncher</h1>
+                    <p>Версия 1.21.1</p>
+                </div>
+                
+                <div class="description-card glass">
+                    <p>Нажмите «ИГРАТЬ», чтобы автоматически подготовить клиент и войти в игру.</p>
+                </div>
+
+                <div class="action-footer">
+                    <div class="status-info">
+                        <span id="status-text">Готов к запуску</span>
+                        <div class="progress-bar-container">
+                            <div id="progress-bar" class="progress-bar"></div>
+                        </div>
+                    </div>
+                    <button id="play-btn" class="primary-btn">
+                        <span id="play-btn-text">ИГРАТЬ</span>
+                    </button>
+                </div>
+            </section>
+
+            <!-- Settings Screen -->
+            <section id="settings-screen" class="screen">
+                <h2>Настройки</h2>
+                <div class="settings-grid">
+                    <div class="setting-item glass">
+                        <label>Выделенная RAM (МБ)</label>
+                        <div class="slider-container">
+                            <input type="range" id="ram-slider" min="2048" max="16384" step="512" value="4096">
+                            <span id="ram-value">4096 MB</span>
+                        </div>
+                    </div>
+                    <div class="setting-item glass">
+                        <label>Путь к игре</label>
+                        <div class="path-display">
+                            <input type="text" id="current-path" placeholder="C:\Games\.ksulauncher">
+                            <button id="browse-btn" class="secondary-btn">Обзор</button>
+                        </div>
+                    </div>
+                    <div class="setting-item glass">
+                        <label>Аккаунт</label>
+                        <button id="logout-btn" class="secondary-btn" style="color: #ef4444; border-color: rgba(239, 68, 68, 0.2);">ВЫЙТИ ИЗ АККАУНТА</button>
+                    </div>
+                    <div class="setting-item glass">
+                        <label>Модпак</label>
+                        <button id="update-btn" class="primary-btn" style="padding: 10px 20px; font-size: 0.8rem;">УСТАНОВИТЬ ОБНОВЛЕНИЕ</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Resource Packs & Shaders Screen -->
+            <section id="rp-screen" class="screen">
+                <div class="screen-header">
+                    <div class="header-left">
+                        <h2>Контент</h2>
+                        <div class="sub-tabs">
+                            <button class="sub-tab active" data-type="resourcepack">Ресурспаки</button>
+                            <button class="sub-tab" data-type="shader">Шейдеры</button>
+                        </div>
+                    </div>
+                    <div class="search-box glass">
+                        <input type="text" id="rp-search-input" placeholder="Поиск на Modrinth...">
+                    </div>
+                </div>
+                
+                <div id="rp-grid" class="rp-grid">
+                    <div class="status-msg">Введите запрос для поиска...</div>
+                </div>
+
+                <div id="rp-pagination" class="pagination-container"></div>
+            </section>
+
+            <!-- Profile / Login (Optional overlay or separate screen) -->
+            <div id="login-overlay" class="overlay glass hidden">
+                <div class="login-card glass">
+                    <h2>Авторизация</h2>
+                    <p>Используйте данные Ely.by</p>
+                    <input type="text" id="email-input" placeholder="Email">
+                    <input type="password" id="pass-input" placeholder="Пароль">
+                    <div id="totp-container" class="hidden">
+                        <input type="text" id="totp-input" placeholder="2FA Код">
+                    </div>
+                    <button id="login-btn" class="primary-btn">ВОЙТИ</button>
+                    <div class="login-links">
+                        <a href="#" id="reg-link">Регистрация</a>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <!-- Logout Modal -->
+    <div id="logout-modal" class="modal-overlay hidden">
+        <div class="modal-card glass">
+            <h2>Выход</h2>
+            <p>Вы точно хотите выйти из аккаунта?</p>
+            <div class="modal-actions">
+                <button id="confirm-logout" class="primary-btn">Да, выйти</button>
+                <button id="cancel-logout" class="secondary-btn">Отмена</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
